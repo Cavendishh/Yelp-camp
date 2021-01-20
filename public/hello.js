@@ -1,1 +1,0 @@
-alert('Hai from the public folder / dir')
