@@ -4,7 +4,6 @@ const { campgroundSchema, reviewSchema } = require('./schemas')
 const ExpressError = require('./utils/ExpressError')
 
 module.exports.isLoggedIn = (req, res, next) => {
-  console.log('REQ.USER --> ', req.user)
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl
     req.flash('error', 'You must be signed in')

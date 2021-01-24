@@ -63,8 +63,6 @@ app.use(session(sessionConfig))
 app.use(flash())
 app.use(helmet())
 
-
-
 const scriptSrcUrls = [
   'https://stackpath.bootstrapcdn.com/',
   'https://api.tiles.mapbox.com/',
@@ -87,7 +85,10 @@ const connectSrcUrls = [
   'https://b.tiles.mapbox.com/',
   'https://events.mapbox.com/',
 ]
-const fontSrcUrls = []
+const fontSrcUrls = [
+  'https://fonts.gstatic.com'
+]
+
 app.use(
   helmet.contentSecurityPolicy({
       directives: {
@@ -109,10 +110,6 @@ app.use(
   })
 )
 
-
-
-
-
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new LocalStrategy(User.authenticate()))
@@ -121,6 +118,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
+  console.log('CURRENTUSER: ',)
   res.locals.currentUrl = req._parsedOriginalUrl.path
   res.locals.currentUser = req.user
   res.locals.success = req.flash('success')

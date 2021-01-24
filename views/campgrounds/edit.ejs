@@ -48,13 +48,13 @@
           </div>
           <div class='mb-3'>
             <% campground.images.forEach(function(img, i) { %>
-              <img src='<%= img.thumbnail %>' class='img-thumbnail' alt=''>
               <div class='form-check-inline'>
+              <img src='<%= img.thumbnail %>' class='img-thumbnail' alt=''>
                 <input type='checkbox' name='deleteImages[]' id='<% i %>' value='<%= img.filename %>'>
+                <label for='image<% i %>'>Delete</label>
               </div>
-              <label for='image<% i %>'>Delete</label>
             <% }) %>
-          </div>
+          </div>          
           <div class='mb-3'>
             <button class='btn btn-info btn-block'>Update campground</button>
           </div>

@@ -9,7 +9,19 @@ const ImageSchema = new Schema({
 })
 
 ImageSchema.virtual('thumbnail').get(function() {
-  return this.url.replace('/upload', '/upload/w_200')
+  return this.url.replace('/upload', '/upload/w_200/ar_4:3,c_fill/')
+})
+
+ImageSchema.virtual('thumbnailIndexPage').get(function() {
+  return this.url.replace('/upload', '/upload/w_600/ar_4:3,c_fill/')
+})
+
+ImageSchema.virtual('compress').get(function() {
+  return this.url.replace('/upload', '/upload/q_auto')
+})
+
+ImageSchema.virtual('aspectRatio').get(function() {
+  return this.url.replace('/upload', '/upload/ar_4:3,c_fill/')
 })
 
 const CampgroundSchema = new Schema({
@@ -43,12 +55,9 @@ const CampgroundSchema = new Schema({
 
 CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
   return `
-    <strong>
+    <strong class='popUpTitle'>
       <a href='/campgrounds/${this._id}'>${this.title}</a>
     </strong>
-    <p>
-      ${this.description.substring(0, 25)}...
-    </p>
   `
 })
 
@@ -61,7 +70,5 @@ CampgroundSchema.post('findOneAndDelete', async function(doc) {
     })
   }
 })
-
-
 
 module.exports = mongoose.model('Campground', CampgroundSchema)
