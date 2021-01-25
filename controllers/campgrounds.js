@@ -3,15 +3,18 @@ const { cloudinary } = require('../cloudinary')
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const geocoder = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN })
 
+//Find all campgrounds and render index template
 module.exports.index = async (req, res) => {
   const campgrounds = await Campground.find({})
   res.render('campgrounds/index', { campgrounds })
 }
 
+//Render page to make a new campground
 module.exports.renderNewForm = (req, res) => {
   res.render('campgrounds/new')
 }
 
+//Logic to creating new campground - redirect to new campground when done
 module.exports.createCampground = async (req, res) => {
   const geoData = await geocoder.forwardGeocode({
     query: req.body.campground.location,
@@ -26,6 +29,7 @@ module.exports.createCampground = async (req, res) => {
   res.redirect(`/campgrounds/${campground._id}`)
 }
 
+//Render and do logic of one campground that was opened
 module.exports.showCampground = async (req, res) => {
   const campground = await Campground.findById(req.params.id)
     .populate({ path: 'reviews', populate: { path: 'author'}})
@@ -37,6 +41,7 @@ module.exports.showCampground = async (req, res) => {
   res.render('campgrounds/show', { campground })
 }
 
+//Render campground edit form
 module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
@@ -47,6 +52,7 @@ module.exports.renderEditForm = async (req, res) => {
   res.render('campgrounds/edit', { campground })
 }
 
+//Logic to update selected campground - redirect after success
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params
   const { deleteImages } = req.body
@@ -64,6 +70,7 @@ module.exports.updateCampground = async (req, res) => {
   res.redirect(`/campgrounds/${campground._id}`)
 }
 
+//Logic to delete said campground - Mongoose middleware helps to delete reviews related to it
 module.exports.deleteCampground = async (req, res) => {
   const { id } = req.params
   await Campground.findByIdAndDelete(id)

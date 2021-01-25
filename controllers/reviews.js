@@ -1,6 +1,7 @@
 const Campground = require('../models/campground')
 const Review = require('../models/review')
 
+//Logic to create a review to specific campground
 module.exports.createReview = async (req, res) => {
   const campground = await Campground.findById(req.params.id)
   const review = new Review(req.body.review)
@@ -12,6 +13,7 @@ module.exports.createReview = async (req, res) => {
   res.redirect(`/campgrounds/${campground._id}`)
 }
 
+//Logic to delete a review to specific campground
 module.exports.deleteReview = async (req, res) => {
   const { id, reviewId } = req.params
   Campground.findByIdAndUpdate(id, { $pull: {reviews: reviewId } })

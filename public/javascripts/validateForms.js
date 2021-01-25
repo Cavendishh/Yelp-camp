@@ -2,6 +2,7 @@
 (function () {
   'use strict'
 
+  //Makes file input more beautiful
   bsCustomFileInput.init()
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to

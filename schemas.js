@@ -1,6 +1,7 @@
 const BaseJoi = require('joi')
 const sanitizeHtml = require('sanitize-html')
 
+//'extension' fuction is used to add method for Joi to escape HTML to prevent certain cybersecurity attacks
 const extension = joi => ({
   type: 'string',
   base: joi.string(),
@@ -21,8 +22,10 @@ const extension = joi => ({
   }
 })
 
+//Extend original Joi with 'extension' function from above
 const Joi = BaseJoi.extend(extension)
 
+//Campground schema created with Joi to help with validations
 module.exports.campgroundSchema = Joi.object({
   campground: Joi.object({
     title: Joi.string().required().escapeHTML(),
@@ -33,6 +36,7 @@ module.exports.campgroundSchema = Joi.object({
   deleteImages: Joi.array()
 })
 
+//Review schema created with Joi to help with validations
 module.exports.reviewSchema = Joi.object({
   review: Joi.object({
     rating: Joi.number().required().min(1).max(5),

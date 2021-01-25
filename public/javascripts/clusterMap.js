@@ -1,5 +1,6 @@
 mapboxgl.accessToken = mapToken
 
+//Using map box to create a cluster map on campgrounds page
 const map = new mapboxgl.Map({
   container: 'clusterMap',
   style: 'mapbox://styles/mapbox/light-v10',
