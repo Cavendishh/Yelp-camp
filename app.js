@@ -118,7 +118,6 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
-  console.log('CURRENTUSER: ',)
   res.locals.currentUrl = req._parsedOriginalUrl.path
   res.locals.currentUser = req.user
   res.locals.success = req.flash('success')

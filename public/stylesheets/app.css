@@ -28,3 +28,7 @@ body {
 .nav-link {
   margin-left: 0.5rem;
 }
+
+.navbar {
+  background-color: #1E88E5;
+}

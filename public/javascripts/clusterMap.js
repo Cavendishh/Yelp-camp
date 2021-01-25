@@ -3,8 +3,8 @@ mapboxgl.accessToken = mapToken
 const map = new mapboxgl.Map({
   container: 'clusterMap',
   style: 'mapbox://styles/mapbox/light-v10',
-  center: [-103.59179687498357, 40.66995747013945],
-  zoom: 3
+  center: [24.9384, 60.1699], //Setup to Helsinki coordinates
+  zoom: 2.6
 })
  
 map.on('load', function () {
@@ -36,11 +36,11 @@ map.on('load', function () {
       'circle-color': [
         'step',
         ['get', 'point_count'],
-        '#00ACC1',
+        '#03A9F4',
         10,
-        '#1E88E5',
-        30,
-        '#3949AB'
+        '#1976D2',
+        // 30,
+        // '#1976D2'
       ],
       'circle-radius': [
         'step',
@@ -48,8 +48,8 @@ map.on('load', function () {
         15,
         10,
         20,
-        30,
-        30
+        // 30,
+        // 30
       ]
     }
   })
@@ -72,7 +72,7 @@ map.on('load', function () {
     source: 'campgrounds',
     filter: ['!', ['has', 'point_count']],
     paint: {
-      'circle-color': '#11b4da',
+      'circle-color': '#4DB6AC',
       'circle-radius': 10,
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff'

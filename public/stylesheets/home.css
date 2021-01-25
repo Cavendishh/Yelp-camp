@@ -17,6 +17,7 @@ body {
   color: rgba(255, 255, 255, 0.5);
   margin-left: 1rem;
   border-bottom: 0.25rem solid transparent;
+  font-size: 1.3rem
 }
 
 .nav-link:hover {

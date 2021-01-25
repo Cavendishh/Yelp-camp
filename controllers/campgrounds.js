@@ -19,11 +19,9 @@ module.exports.createCampground = async (req, res) => {
   }).send()
   const campground = new Campground(req.body.campground)
   campground.geometry = geoData.body.features[0].geometry
-  console.log(req.files)
   campground.images = req.files.map(f => ({ url: f.path, filename: f.filename}))
   campground.author = req.user._id
   await campground.save()
-  console.log(campground)
   req.flash('success', 'Succesfully made a new campground')
   res.redirect(`/campgrounds/${campground._id}`)
 }
@@ -32,7 +30,6 @@ module.exports.showCampground = async (req, res) => {
   const campground = await Campground.findById(req.params.id)
     .populate({ path: 'reviews', populate: { path: 'author'}})
     .populate('author')
-  console.log('CAMPGROUND ----- > ', campground)
   if (!campground) {
     req.flash('error', 'The campground was not found')
     return res.redirect('/campgrounds')

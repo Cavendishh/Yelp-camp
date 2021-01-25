@@ -22,7 +22,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)]
 const seedDB = async () => {
   await Campground.deleteMany({})
 
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 20; i++) {
     const random1000 = Math.floor(Math.random() * 1000)
     const price = Math.floor(Math.random() * 20) + 10
     const camp = new Campground({
@@ -37,16 +37,7 @@ const seedDB = async () => {
           cities[random1000].latitude
         ]
       },
-      images: [
-        {
-          url: 'https://res.cloudinary.com/dgntv9bgo/image/upload/v1611248816/YelpCamp/g6nlqjond6orgrjn6z9e.jpg',
-          filename: 'YelpCamp/g6nlqjond6orgrjn6z9e'
-        },
-        {
-          url: 'https://res.cloudinary.com/dgntv9bgo/image/upload/v1611248828/YelpCamp/wddod7rpl1inosa5jrh7.jpg',
-          filename: 'YelpCamp/wddod7rpl1inosa5jrh7'
-        }
-      ],
+      images: [],
       description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium accusantium, veniam omnis non fuga dignissimos eaque tempora ipsam accusamus earum sunt magnam quisquam assumenda incidunt quod perspiciatis fugiat. Incidunt, repellendus!`,
       price
     })
@@ -60,14 +51,14 @@ const deleteDB = async () => {
 
 }
 
-deleteDB()
-  .then(() => {
-    mongoose.connection.close()
-    console.log('Database closed')
-})
-
-// seedDB()
+// deleteDB()
 //   .then(() => {
 //     mongoose.connection.close()
 //     console.log('Database closed')
 // })
+
+seedDB()
+  .then(() => {
+    mongoose.connection.close()
+    console.log('Database closed')
+})
