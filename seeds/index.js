@@ -57,8 +57,8 @@ const deleteDB = async () => {
 //     console.log('Database closed')
 // })
 
-seedDB()
-  .then(() => {
-    mongoose.connection.close()
-    console.log('Database closed')
-})
+// seedDB()
+//   .then(() => {
+//     mongoose.connection.close()
+//     console.log('Database closed')
+// })

@@ -2,6 +2,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 //Imported packages and files
 const express = require('express')
+const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
@@ -15,18 +16,18 @@ const helmet = require('helmet')
 const User = require('./models/user')
 const ExpressError = require('./utils/ExpressError')
 const { scriptSrcUrls, styleSrcUrls, connectSrcUrls, fontSrcUrls } = require('./public/javascripts/helmetUrls')
+const mongoStore = require('connect-mongo')(session)
 const PORT = 3000
-
-const app = express()
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp'
+const secret = process.env.SECRET || 'development'
 
 //Imported routes
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campground')
 const reviewRoutes = require('./routes/reviews')
-const url = 'mongodb://localhost:27017/yelp-camp'
 
 //Connecting to mongoose
-mongoose.connect(url, {
+mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -47,8 +48,19 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
 
+const store = new mongoStore({
+  url: mongoUrl,
+  secret: 'secret',
+  touchAfter: 24 * 60 * 60
+})
+
+store.on('error', function (e){
+  console.log('Session store error: ', e)
+})
+
 //Configuring session cookies
 const sessionConfig = {
+  store,
   name: 'session',
   secret: 'secret',
   resave: false,
