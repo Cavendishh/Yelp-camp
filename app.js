@@ -17,15 +17,13 @@ const User = require('./models/user')
 const ExpressError = require('./utils/ExpressError')
 const { scriptSrcUrls, styleSrcUrls, connectSrcUrls, fontSrcUrls } = require('./public/javascripts/helmetUrls')
 const mongoStore = require('connect-mongo')(session)
-const PORT = 3000
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp'
-const secret = process.env.SECRET || 'development'
 
 //Imported routes
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campground')
 const reviewRoutes = require('./routes/reviews')
 
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/yelp-camp'
 //Connecting to mongoose
 mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
@@ -48,9 +46,11 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
 
+const secret = process.env.SECRET || 'development'
+//Making session storage to mongoDB
 const store = new mongoStore({
   url: mongoUrl,
-  secret: 'secret',
+  secret,
   touchAfter: 24 * 60 * 60
 })
 
@@ -62,7 +62,7 @@ store.on('error', function (e){
 const sessionConfig = {
   store,
   name: 'session',
-  secret: 'secret',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -138,7 +138,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err })
 })
 
+const port = process.env.PORT || 3000
 //Start the server using express
-app.listen(PORT, () => {
-    console.log(`Serving on port ${PORT}`)
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })
