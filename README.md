@@ -7,7 +7,7 @@
   and technologies during the bootcamp. The bootcamp was comprehensive and taught me a lot of modern-day web development practices. To digest 
   all that massive information took a while but I am confident this project taught me a significant amount.
 </p>
-<strong>Some of the tools, technologies & skills introducted in bootcamp: </strong>
+<strong>Some of the tools, technologies & skills introduced in bootcamp: </strong>
 <ul>
   <li>HTML5</li>
   <li>CSS3</li>
@@ -33,10 +33,10 @@
 <p><strong>Functionality:</strong></p>
 <ul>
   <li>Full CRUD functionality</li>
-  <li>Create; Make a new campground that has a title, price, description and images</li>
-  <li>Read; Browse campgrounds that are added by other people on clustermap or index page </li>
+  <li>Create; Make a new campground that has a title, price, description, and images</li>
+  <li>Read; Browse campgrounds that are added by other people on cluster map or index page </li>
   <li>Update; Update campgrounds that you have created when logged in</li>
-  <li>Delete; Delete campgrounds that you have created. Also deletes reviews from database on that specific campground</li>
+  <li>Delete; Delete campgrounds that you have created. Also deletes reviews from a database on that specific campground</li>
   <li>Give campgrounds reviews and delete them</li>
   <li>The page is protected by authorizations and authentications to prevent people from destroying other people's campgrounds or reviews</li>
   <li>Routes are safe - Postman cannot send requests without authorization</li>
