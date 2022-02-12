@@ -7,7 +7,7 @@
   and technologies during the bootcamp. The bootcamp was comprehensive and taught me a lot of modern-day web development practices. To digest 
   all that massive information took a while but I am confident this project taught me a significant amount.
 </p>
-<strong>Some of the tools, technologies & skills introduced in bootcamp: </strong>
+<strong>Some of the tools, technologies & skills learnt during the bootcamp: </strong>
 <ul>
   <li>HTML5</li>
   <li>CSS3</li>
